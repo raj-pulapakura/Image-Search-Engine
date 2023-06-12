@@ -3,11 +3,11 @@ import cv2
 import os
 from model_helpers import load_models, get_similar
 
-
 # create app
 app = Flask(__name__)
-app.config["PYTHON_VERSION"] = "3.9.11"
 
+os.environ["PYTHON_VERSION"] = "3.9.11"
+print(os.environ.get("PYTHON_VERSION"))
 
 # load models
 classification_model, siamese_model = load_models(
