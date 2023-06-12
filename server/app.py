@@ -23,24 +23,21 @@ def hello():
             "result": "it works!"
         }
     if request.method == "POST":
-        return {
-            "result": "post works!"
-        }
-        # # save the image
-        # print("SAVING IMAGE")
-        # request.files["image"].save("input_img.jpg")
-        # # read it in
-        # print("READING IMAGE")
-        # input_img = cv2.imread("input_img.jpg")
-        # # get top 20 similar images
-        # print("GET SIMILAR IMAGE")
-        # result = get_similar(classification_model, siamese_model, input_img, 20)
-        # # delete input image
-        # print("REMOVE INPUT IMAGE")
-        # os.remove("input_img.jpg")
-        # # return result
-        # print("RETURN")
+        # save the image
+        print("SAVING IMAGE")
+        request.files["image"].save("input_img.jpg")
+        # read it in
+        print("READING IMAGE")
+        input_img = cv2.imread("input_img.jpg")
+        # get top 20 similar images
+        print("GET SIMILAR IMAGE")
+        result = get_similar(classification_model, siamese_model, input_img, 20)
+        # delete input image
+        print("REMOVE INPUT IMAGE")
+        os.remove("input_img.jpg")
         # return result
+        print("RETURN")
+        return result
 
     return {
         "result": "Invalid method type. Only GET and POST are allowed."
