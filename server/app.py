@@ -18,19 +18,25 @@ classification_model, siamese_model = load_models(
 @app.route("/", methods=["POST", "GET"])
 def hello():
     if request.method == "GET":
+        print("GET REQUEST SUCESSFUL.")
         return {
             "result": "it works!"
         }
     if request.method == "POST":
         # save the image
+        print("SAVING IMAGE")
         request.files["image"].save("input_img.jpg")
         # read it in
+        print("READING IMAGE")
         input_img = cv2.imread("input_img.jpg")
         # get top 20 similar images
+        print("GET SIMILAR IMAGE")
         result = get_similar(classification_model, siamese_model, input_img, 20)
         # delete input image
+        print("REMOVE INPUT IMAGE")
         os.remove("input_img.jpg")
         # return result
+        print("RETURN")
         return result
 
     return {
