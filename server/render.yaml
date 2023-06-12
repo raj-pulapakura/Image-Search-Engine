@@ -1,9 +1,0 @@
-previewsEnabled: true
-services:
-  - type: web
-    plan: free
-    name: app
-    env: python
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.9.11
