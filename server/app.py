@@ -15,7 +15,7 @@ classification_model, siamese_model = load_models(
 
 
 # route to get similar images
-@app.route("/", methods=["POST"])
+@app.route("/", methods=["POST", "GET"])
 def hello():
     if request.method == "GET":
         return {
