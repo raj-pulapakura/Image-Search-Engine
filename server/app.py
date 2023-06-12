@@ -17,6 +17,10 @@ classification_model, siamese_model = load_models(
 # route to get similar images
 @app.route("/", methods=["POST"])
 def hello():
+    if request.method == "GET":
+        return {
+            "result": "it works!"
+        }
     if request.method == "POST":
         # save the image
         request.files["image"].save("input_img.jpg")
@@ -30,6 +34,6 @@ def hello():
         return result
 
     return {
-        "result": "Invalid method type. Only POST is allowed."
+        "result": "Invalid method type. Only GET and POST are allowed."
     }
 
