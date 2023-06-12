@@ -1,7 +1,7 @@
 import tensorflow as tf
 import cv2
 import numpy as np
-from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
+from tensorflow.keras.applications.mobilenet import preprocess_input, decode_predictions
 from unsplash_api import fetch_imgs, load_img_from_url
 
 
