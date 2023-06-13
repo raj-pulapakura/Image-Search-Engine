@@ -3,6 +3,7 @@ import os
 from PIL import Image
 from model_helpers import load_models, get_similar
 from io import BytesIO
+import requests
 
 # create app
 app = Flask(__name__)
@@ -19,9 +20,12 @@ classification_model, siamese_model = load_models(
 @app.route("/", methods=["POST", "GET"])
 def hello():
     if request.method == "GET":
-        print("GET REQUEST SUCESSFUL.")
+        resp = requests.get("https://en.wikipedia.org/wiki/Text_file#:~:text=A%20text%20file%20(sometimes%20spelled,of%20lines%20of%20electronic%20text.")
+
+        text = str(resp.content[0:10])
         return {
-            "result": "it works!"
+            "result": "it works!",
+            "text": text
         }
     if request.method == "POST":
         # read it in
