@@ -2,6 +2,7 @@ from flask import Flask, request
 import os
 from PIL import Image
 from model_helpers import load_models, get_similar
+from io import BytesIO
 
 # create app
 app = Flask(__name__)
@@ -23,18 +24,12 @@ def hello():
             "result": "it works!"
         }
     if request.method == "POST":
-        # save the image
-        print("SAVING IMAGE")
-        request.files["image"].save("input_img.jpg")
         # read it in
         print("READING IMAGE")
-        input_img = Image.open("input_img.jpg")
+        input_img = Image.open(BytesIO(request.files["image"].stream.read()))
         # get top 20 similar images
         print("GET SIMILAR IMAGE")
         result = get_similar(classification_model, siamese_model, input_img, 20)
-        # delete input image
-        print("REMOVE INPUT IMAGE")
-        os.remove("input_img.jpg")
         # return result
         print("RETURN")
         return result
