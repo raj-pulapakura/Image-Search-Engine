@@ -10,8 +10,8 @@ def load_models(classifier_path, siamese_path):
     """
     Loads that classification model and siamese model.
     """
-    classification_model = torch.load(classifier_path)
-    siamese_model = torch.load(siamese_path)
+    classification_model = torch.jit.load(classifier_path)
+    siamese_model = torch.jit.load(siamese_path)
     return classification_model, siamese_model
 
 

@@ -1,6 +1,6 @@
 from flask import Flask, request
-import cv2
 import os
+from PIL import Image
 from model_helpers import load_models, get_similar
 
 # create app
@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 # load models
 classification_model, siamese_model = load_models(
-    "models/classification_model.pth",
-    "models/siamese_model.pth"
+    "models/classification_model.pt",
+    "models/siamese_model.pt"
 )
 
 
@@ -28,7 +28,7 @@ def hello():
         request.files["image"].save("input_img.jpg")
         # read it in
         print("READING IMAGE")
-        input_img = cv2.imread("input_img.jpg")
+        input_img = Image.open("input_img.jpg")
         # get top 20 similar images
         print("GET SIMILAR IMAGE")
         result = get_similar(classification_model, siamese_model, input_img, 20)
