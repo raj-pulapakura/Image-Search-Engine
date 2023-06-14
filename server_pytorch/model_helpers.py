@@ -29,8 +29,10 @@ def get_similar(classification_model, siamese_model, input_img, n):
     """
     
     # process image for inference
+    print("PROCESSING DA IMAGE")
     x = process_img(input_img)
     
+    print("GETTING DEM PREDICTIONS")
     # get classification label
     prediction = classification_model(x).squeeze(0).softmax(0)
     class_id = prediction.argmax().item()
