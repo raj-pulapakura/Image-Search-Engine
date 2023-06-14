@@ -29,8 +29,8 @@ def hello():
         }
     if request.method == "POST":
         # read it in
-        # print("READING IMAGE")
-        # input_img = Image.open(BytesIO(request.files["image"].stream.read()))
+        print("READING IMAGE")
+        input_img = Image.open(BytesIO(request.files["image"].stream.read()))
         # # get top 20 similar images
         # print("GET SIMILAR IMAGE")
         # result = get_similar(classification_model, siamese_model, input_img, 20)
