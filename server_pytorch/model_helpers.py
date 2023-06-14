@@ -40,34 +40,34 @@ def get_similar(classification_model, siamese_model, input_img, n):
     category_name = weights.meta["categories"][class_id]
     print(f"{category_name}: {100 * score:.1f}%")
 
-    # retrieve comparison images
-    img_urls = fetch_imgs(category_name, n_pages=5)
-    print(f"{len(img_urls)} images retrieved.")
+    # # retrieve comparison images
+    # img_urls = fetch_imgs(category_name, n_pages=5)
+    # print(f"{len(img_urls)} images retrieved.")
 
-    # compare images using siamese model
-    sims = []
+    # # compare images using siamese model
+    # sims = []
 
-    for index, img_url in enumerate(img_urls):
-        img = load_img_from_url(img_url)
-        img = process_img(img)
-        sim_score = siamese_model(x, img)
-        sims.append({
-            "comp": img,
-            "url": img_url,
-            "sim_score": sim_score,
-        })
-        print(f"Image {index} done.")
+    # for index, img_url in enumerate(img_urls):
+    #     img = load_img_from_url(img_url)
+    #     img = process_img(img)
+    #     sim_score = siamese_model(x, img)
+    #     sims.append({
+    #         "comp": img,
+    #         "url": img_url,
+    #         "sim_score": sim_score,
+    #     })
+    #     print(f"Image {index} done.")
 
-    # Sort images by similarity score
-    sims.sort(key=lambda x: x["sim_score"])
+    # # Sort images by similarity score
+    # sims.sort(key=lambda x: x["sim_score"])
     
-    # Get top n similar images
-    sim_images = sims[:n]
-    sim_images = [x["url"] for x in sim_images]
-    print("Done!")
-    return {
-        "result": sim_images
-    }
+    # # Get top n similar images
+    # sim_images = sims[:n]
+    # sim_images = [x["url"] for x in sim_images]
+    # print("Done!")
+    # return {
+    #     "result": sim_images
+    # }
 
 def wassup():
     print("Wassup!!")
