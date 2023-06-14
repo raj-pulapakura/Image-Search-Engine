@@ -23,6 +23,7 @@ def hello():
         resp = requests.get("https://en.wikipedia.org/wiki/Text_file#:~:text=A%20text%20file%20(sometimes%20spelled,of%20lines%20of%20electronic%20text.")
 
         text = str(resp.content[0:10])
+        print("GET REQUEST!!")
         return {
             "result": "it works!",
             "text": text
