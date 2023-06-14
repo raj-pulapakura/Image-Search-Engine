@@ -32,13 +32,13 @@ def get_similar(classification_model, siamese_model, input_img, n):
     print("PROCESSING DA IMAGE")
     x = process_img(input_img)
     
-    # print("GETTING DEM PREDICTIONS")
-    # # get classification label
-    # prediction = classification_model(x).squeeze(0).softmax(0)
-    # class_id = prediction.argmax().item()
-    # score = prediction[class_id].item()
-    # category_name = weights.meta["categories"][class_id]
-    # print(f"{category_name}: {100 * score:.1f}%")
+    print("GETTING DEM PREDICTIONS")
+    # get classification label
+    prediction = classification_model(x).squeeze(0).softmax(0)
+    class_id = prediction.argmax().item()
+    score = prediction[class_id].item()
+    category_name = weights.meta["categories"][class_id]
+    print(f"{category_name}: {100 * score:.1f}%")
 
     # # retrieve comparison images
     # img_urls = fetch_imgs(category_name, n_pages=5)
