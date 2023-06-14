@@ -66,3 +66,6 @@ def get_similar(classification_model, siamese_model, input_img, n):
     return {
         "result": sim_images
     }
+
+def wassup():
+    print("Wassup!!")

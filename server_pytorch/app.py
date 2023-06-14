@@ -1,7 +1,7 @@
 from flask import Flask, request
 import os
 from PIL import Image
-from model_helpers import load_models, get_similar
+from model_helpers import load_models, get_similar, wassup
 from io import BytesIO
 import requests
 
@@ -37,6 +37,7 @@ def hello():
         # # return result
         # print("RETURN")
         # return result
+        wassup()
         return {
             "result": "POST works!"
         }
