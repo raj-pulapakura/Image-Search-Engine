@@ -37,7 +37,7 @@ def process_img(img):
     return x
 
 
-def get_prediction(classification_model, input_img, n):
+def get_prediction(classification_model, input_img):
     """
     Finds n similar images of an input_img
     """
@@ -58,5 +58,6 @@ def get_prediction(classification_model, input_img, n):
 
     return {
         "classification": category_name,
-        "img_urls": img_urls
+        "img_urls": img_urls,
+        "original_img": input_img,
     }
