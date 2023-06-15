@@ -1,7 +1,7 @@
 from flask import Flask, request
 import os
 from PIL import Image
-from model_helpers import load_models, get_similar, wassup
+from model_helpers import load_models, get_prediction, wassup
 from io import BytesIO
 import requests
 
@@ -33,14 +33,14 @@ def hello():
         print("READING IMAGE")
         input_img = Image.open(BytesIO(request.files["image"].stream.read()))
         # # get top 20 similar images
-        print("GET SIMILAR IMAGE")
-        result = get_similar(classification_model, siamese_model, input_img, 20)
+        print("GET CLASSIFICATION AND SIMILAR IMAGES")
+        result = get_prediction(classification_model, siamese_model, input_img, 20)
         # # return result
         # print("RETURN")
         # return result
         wassup()
         return {
-            "result": "POST works!"
+            "result": result
         }
 
     return {

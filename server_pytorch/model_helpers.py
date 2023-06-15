@@ -23,7 +23,7 @@ def process_img(img):
     return x
 
 
-def get_similar(classification_model, siamese_model, input_img, n):
+def get_prediction(classification_model, siamese_model, input_img, n):
     """
     Finds n similar images of an input_img
     """
@@ -40,9 +40,14 @@ def get_similar(classification_model, siamese_model, input_img, n):
     category_name = weights.meta["categories"][class_id]
     print(f"{category_name}: {100 * score:.1f}%")
 
-    # # retrieve comparison images
-    # img_urls = fetch_imgs(category_name, n_pages=5)
-    # print(f"{len(img_urls)} images retrieved.")
+    # retrieve comparison images
+    img_urls = fetch_imgs(category_name, n_pages=5)
+    print(f"{len(img_urls)} images retrieved.")
+
+    return {
+        "classification": category_name,
+        "img_urls": img_urls
+    }
 
     # # compare images using siamese model
     # sims = []
