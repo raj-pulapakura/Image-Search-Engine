@@ -59,5 +59,4 @@ def get_prediction(classification_model, input_img):
     return {
         "classification": category_name,
         "img_urls": img_urls,
-        "original_img": input_img,
     }

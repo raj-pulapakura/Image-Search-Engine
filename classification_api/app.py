@@ -21,7 +21,7 @@ def hello():
         }
     if request.method == "POST":
         input_img = Image.open(BytesIO(request.files["image"].stream.read()))
-        result = get_prediction(classification_model, input_img, 20)
+        result = get_prediction(classification_model, input_img)
         return {
             "result": result
         }
