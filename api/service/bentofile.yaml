@@ -1,0 +1,10 @@
+service: "service:ise_service"
+labels:
+  owner: Raj
+  stage: dev
+include:
+  - "*.py"
+python:
+  packages:
+    - torchvision
+    - requests
