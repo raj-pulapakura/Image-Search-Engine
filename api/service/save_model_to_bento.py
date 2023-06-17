@@ -1,10 +1,18 @@
 import bentoml
-import torch
+from model_utils import create_models
 
-def load_and_save_model(model_path):
-    model = torch.load(model_path)
-    bento_model = bentoml.pytorch.save_model("classification_model", model)
+
+def save_model(model, tag):
+    """
+    Saves model to bento local store
+    """
+    model.eval()
+    bento_model = bentoml.pytorch.save_model(tag, model)
     print(f"Bento model tag: {bento_model.tag}")
 
+
 if __name__ == "__main__":
-    load_and_save_model(r"C:\Users\User\OneDrive\Desktop\literally everything\code\projects\Image Search Engine\classification_api\models\classification_model.pt")
+
+    classification_model, siamese_model = create_models()
+    save_model(classification_model, "classification_model")
+    save_model(siamese_model, "siamese_model")

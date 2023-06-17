@@ -1,0 +1,9 @@
+api_version: v1
+name: image_search_engine
+operator:
+  name: aws-lambda
+template: terraform
+spec:
+  region: ap-southeast-2
+  timeout: 100
+  memory_size: 512
