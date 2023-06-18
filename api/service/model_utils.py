@@ -49,9 +49,12 @@ def create_models():
     return classification_model, siamese_model
 
 
-def classify_image(classification_runner, siamese_runner, image):
+def compute_similar_imgs(classification_runner, siamese_runner, image):
     """
-    
+    1. Classiies the image using the classification_runner.
+    2. Fetches 50 images of this class from the Unsplash API.
+    3. The 20 most similar images to the input image are found using the siamese_runner.
+    4. These 20 images are returned along with the classification are returned.
     """
 
     # preprocess image
@@ -85,6 +88,7 @@ def classify_image(classification_runner, siamese_runner, image):
     sim_images = sims[:20]
     sim_images = [x["url"] for x in sim_images]
 
+    # return classification and similar images
     return {
         "classification": category_name,
         "sim_images": sim_images,
