@@ -71,12 +71,11 @@ def compute_similar_imgs(classification_runner, siamese_runner, image):
     # calculate similarity scores
     sims = []
 
-    for index, img_url in enumerate(img_urls):
+    for img_url in img_urls:
         img = load_img_from_url(img_url)
         img = preprocess(img).unsqueeze(0)
         sim_score = siamese_runner.run(x, img)
         sims.append({
-            "comp": img,
             "url": img_url,
             "sim_score": sim_score,
         })
