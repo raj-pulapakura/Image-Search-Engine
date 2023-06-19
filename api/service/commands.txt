@@ -1,0 +1,3 @@
+build new bento: bentoml build
+update bentoctl image: bentoctl build -b image_search_engine_service:latest -f deployment_config.yaml
+run terraform commands: bentoctl apply -f deployment_config.yaml

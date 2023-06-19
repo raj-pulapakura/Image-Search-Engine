@@ -1,5 +1,0 @@
-image_search_engine_service:
-  http:
-    cors:
-      enabled: true
-        access_control_allow_origins: ["*"]
