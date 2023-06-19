@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
+import { inter900 } from '../pages/_app'
 
 type Props = {
   children?: ReactNode
@@ -8,24 +8,18 @@ type Props = {
 }
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
-  <div>
+  <div className="">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <header>
-      <nav>
-        <Link href="/">Home</Link> | <Link href="/about">About</Link> |{' '}
-        <Link href="/users">Users List</Link> |{' '}
-        <a href="/api/users">Users API</a>
-      </nav>
+    <header className="flex-none border-b-2 border-black">
+      <h1 className={`text-5xl ${inter900.className} text-center`}>Image Search Engine</h1>
     </header>
-    {children}
-    <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
-    </footer>
+    <div className="flex-1">
+      {children}
+    </div>
   </div>
 )
 
