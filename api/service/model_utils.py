@@ -3,6 +3,7 @@ from torchvision import  models
 import torch.nn.functional as F
 import torch.nn as nn
 from image_utils import fetch_imgs, load_img_from_url
+from PIL import Image
 
 
 weights = models.MobileNet_V3_Small_Weights.DEFAULT
@@ -58,8 +59,9 @@ def compute_similar_imgs(classification_runner, siamese_runner, image):
     """
 
     # preprocess image
+    image = image.convert("RGB")
     x = preprocess(image).unsqueeze(0)
-    
+
     # make prediction
     prediction = classification_runner.run(x)
     class_id = prediction.argmax().item()
