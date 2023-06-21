@@ -1,17 +1,17 @@
 import React, {useReducer, createContext} from 'react'
 import { AppProps } from 'next/app'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import '../styles/index.css'
 
-export const inter400 = Inter({weight: "400", subsets: ["latin"]})
-export const inter800 = Inter({weight: "800", subsets: ["latin"]})
-export const inter900 = Inter({weight: "900", subsets: ["latin"]})
+export const fontNormal = Poppins({weight: "400", subsets: ["latin"]})
+export const fontBold = Poppins({weight: "800", subsets: ["latin"]})
+export const fontBlack = Poppins({weight: "900", subsets: ["latin"]})
 
 // define initials
 export interface FileState {
   file: File | null,
   fileURL: string | null,
-  status: "awaiting upload" | "fetching" | "done",
+  status: "awaiting upload" | "fetching similar images..." | "done",
   errorMsg: string | null,
   data: {
     classification: string,
@@ -78,7 +78,7 @@ export const FileContext = createContext<{fileState: FileState, dispatch: React.
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [fileState, dispatch] = useReducer(fileReducer, initialFileState)
 
-  return <main className={inter400.className}>
+  return <main className={fontNormal.className}>
     <FileContext.Provider value={{fileState, dispatch}}>
       <Component {...pageProps} />
     </FileContext.Provider>

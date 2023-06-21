@@ -50,7 +50,7 @@ export default function DragAndDrop({children}: Props) {
     
     return (
       <form 
-        className={dragActive ? "bg-blue-200" : "bg-blue-100"} 
+        className={`w-3/4 m-auto ${dragActive ? "bg-blue-100" : "bg-white"} border-black border-2 p-10 rounded-lg border-dashed`}
         id="form-file-upload" 
         onSubmit={(e) => e.preventDefault()} 
         onDragEnter={handleDrag}

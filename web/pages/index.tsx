@@ -1,16 +1,11 @@
-import Link from 'next/link'
 import Layout from '../components/Layout'
-import { FileAction, FileContext, FileState, inter800 } from './_app'
-import { Dispatch, useContext, useEffect, useRef, useState } from 'react';
+import { FileAction, FileContext, FileState, fontBold } from './_app'
+import { Dispatch, useContext, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import DragAndDrop from '../components/DragAndDrop';
-
-type APIResponse = {
-  classification: string,
-  message: string, 
-  sim_images: string[],
-}
-
+import { useRouter } from 'next/router';
+import Gallery from '../components/Gallery';
+import { ProgressBar } from 'react-loader-spinner'
 
 export async function fetchSimilarImages(fileState: FileState, dispatch: Dispatch<FileAction>) {
   if (!fileState.file) return;
@@ -23,7 +18,7 @@ export async function fetchSimilarImages(fileState: FileState, dispatch: Dispatc
   // clear and update state
   dispatch({
     type: "update status",
-    payload: "fetching"
+    payload: "fetching similar images..."
   })
 
   dispatch({
@@ -80,7 +75,8 @@ export async function fetchSimilarImages(fileState: FileState, dispatch: Dispatc
 export default function IndexPage() {
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const { fileState, dispatch } = useContext(FileContext)
+  const { fileState, dispatch } = useContext(FileContext);
+  const router = useRouter();
 
   // update file and fileURL whenever input changes
   const handleFileInputChange = (event) => {
@@ -100,13 +96,12 @@ export default function IndexPage() {
   }, [fileState.fileURL])
 
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
+    <Layout title="Home">
       <DragAndDrop>
-        <div className="text-center">
-          <button onClick={() => inputRef.current.click()} className={`bg-black text-white ${inter800.className} px-10 py-2 rounded-md shadow-2xl`}>
+        <div className="flex flex-col items-center">
+          <button onClick={() => inputRef.current.click()} className={`bg-black hover:bg-white text-white hover:text-black border-white border-2 hover:border-black ${fontBold.className} px-14 py-2.5 rounded-md shadow hover:shadow-2xl`}>
             UPLOAD
           </button>
-
           <input
             ref={inputRef}
             type="file"
@@ -114,27 +109,41 @@ export default function IndexPage() {
             onChange={handleFileInputChange}
             hidden
           />
-          <p>API status: {fileState.status}</p>
-          <p>{fileState.errorMsg && `An error occurred: ${fileState.errorMsg}`}</p>
-          {fileState.fileURL && <>
-            <p>Selected file: {fileState.file.name}</p>
-            <Image src={fileState.fileURL} alt="Uploaded image" width={100} height={100}/>
-          </>}
-          <h3 className={`mt-6 ${inter800.className} text-xl`}>
-            or drag and drop anywhere on this screen
+          <h3 className={`mt-6 ${fontBold.className} text-xl text-center`}>
+            or drag and drop a file into this box
           </h3>
-          {
-            fileState.data && fileState.data.sim_images.map((imgUrl) => (
-              <Image
-              src={imgUrl} 
-              alt={`Image from ${imgUrl}`} 
-              width={100}
-              height={100}
-              />
-            ))
+          {fileState.fileURL && 
+            <>
+              <div>
+                <Image className="mt-6" src={fileState.fileURL} alt="Uploaded image" width={100} height={100} />
+              </div>
+            </>
           }
         </div>
       </DragAndDrop>
+
+      <div className="w-3/4 m-auto flex justify-between mt-5 items-center">
+        <div>
+          <p>Status: {fileState.status}</p>
+          <p>{fileState.errorMsg && `An error occurred: ${fileState.errorMsg}`}</p>
+        </div>
+        { fileState.status === "fetching similar images..." && 
+          <ProgressBar
+            width="50"
+            height="50"
+            borderColor='blue'
+            barColor="blue"
+          />
+        }
+      </div>
+      
+      {
+        fileState.status === "done" && !fileState.errorMsg && (
+          <div className="mt-20">
+            <Gallery />
+          </div>
+        )
+      }
     </Layout>
   );
 }

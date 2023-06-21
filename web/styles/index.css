@@ -3,3 +3,9 @@
 @tailwind components;
 /* purgecss end ignore */
 @tailwind utilities;
+
+html,body,#wrapper {
+    height:100%;
+    margin:0;
+    padding:0;
+}
