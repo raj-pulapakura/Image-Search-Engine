@@ -13,7 +13,11 @@ def fetch_imgs(keyword, n_pages=3):
     url = f"https://api.unsplash.com/search/photos?page={i}&query={keyword}&client_id={client_id}"
     results = requests.get(url).json()["results"]
     for x in results:
-      img_urls.append(x["urls"]["small"])
+      img_urls.append({
+        "small": x["urls"]["small"],
+        "full": x["urls"]["full"],
+      })
+
   return img_urls
 
 

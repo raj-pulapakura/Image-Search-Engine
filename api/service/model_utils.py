@@ -74,7 +74,7 @@ def compute_similar_imgs(classification_runner, siamese_runner, image):
     sims = []
 
     for img_url in img_urls:
-        img = load_img_from_url(img_url)
+        img = load_img_from_url(img_url["small"])
         img = preprocess(img).unsqueeze(0)
         sim_score = siamese_runner.run(x, img)
         sims.append({
