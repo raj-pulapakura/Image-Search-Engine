@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { inter800 } from './_app'
-import { useContext, useEffect, useRef, useState } from 'react';
+import Layout from '../components/Layout'
+import { FileAction, FileContext, FileState, inter800 } from './_app'
+import { Dispatch, useContext, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import DragAndDrop from '../components/DragAndDrop';
 
@@ -11,65 +12,77 @@ type APIResponse = {
 }
 
 
+export async function fetchSimilarImages(fileState: FileState, dispatch: Dispatch<FileAction>) {
+  if (!fileState.file) return;
+
+  // check if the file is an image
+  if (!fileState.file.type.startsWith("image")) {
+    return alert("Invalid file type");
+  }
+
+  // clear and update state
+  dispatch({
+    type: "update status",
+    payload: "fetching"
+  })
+
+  dispatch({
+    type: "update errorMsg",
+    payload: ""
+  })
+
+  dispatch({
+    type: "update data",
+    payload: null
+  })
+
+  // create form data
+  const data = new FormData();
+  data.append("image", fileState.file);
+
+  // fetch
+  const res = await fetch(
+    "https://shzs1c1u45.execute-api.ap-southeast-2.amazonaws.com/predict", 
+    {
+      method: "POST",
+      body: data,
+    }
+  );
+
+  const json = await res.json();
+  console.log(json);
+
+  // update status
+  dispatch({
+    type: "update status",
+    payload: "done"
+  })
+
+  // check for errors
+  if (json.message) {
+    dispatch({
+      type: "update errorMsg",
+      payload: json.message
+    })
+  } else {
+    // update data
+    dispatch({
+      type: "update data",
+      payload: {
+        classification: json.classification, 
+        sim_images: json.sim_images
+      }
+    })
+  }
+}
+
+
 export default function IndexPage() {
 
   const inputRef = useRef<HTMLInputElement>(null);
- 
-  useEffect(() => {
-    console.log("index is crazy")
-    console.log(fileState);
-    console.log(dispatch);
-  }, [fileState]);
+  const { fileState, dispatch } = useContext(FileContext)
 
-  useEffect(() => {
-    if (fileState.file) {
-      dispatch({
-        type: "update status",
-        payload: "fetching"
-      })
-
-      dispatch({
-        type: "update errorMsg",
-        payload: ""
-      })
-
-      dispatch({
-        type: "update data",
-        payload: null
-      })
-
-      const data = new FormData();
-      data.append("image", fileState.file);
-      
-      fetch("https://shzs1c1u45.execute-api.ap-southeast-2.amazonaws.com/predict", {
-        method: "POST",
-        body: data,
-      })
-      .then((res) => res.json())
-      .then((json: APIResponse) => {
-        dispatch({
-          type: "update status",
-          payload: "done"
-        })
-        if (json.message) {
-          dispatch({
-            type: "update errorMsg",
-            payload: "File size too big."
-          })
-        } else {
-          console.log(json);
-          dispatch({
-            type: "update data",
-            payload: {
-              classification: json.classification, 
-              sim_images: json.sim_images
-            }
-          })
-        }
-      });
-    }
-  }, [fileState.fileURL])
-
+  // update file and fileURL whenever input changes
   const handleFileInputChange = (event) => {
     dispatch({
       type: "update file",
@@ -80,6 +93,11 @@ export default function IndexPage() {
       payload: URL.createObjectURL(event.target.files[0])
     })
   };
+
+  // fetch similar images whenever fileURL changes
+  useEffect(() => {
+    fetchSimilarImages(fileState, dispatch);
+  }, [fileState.fileURL])
 
   return (
     <Layout title="Home | Next.js + TypeScript Example">
@@ -120,3 +138,4 @@ export default function IndexPage() {
     </Layout>
   );
 }
+

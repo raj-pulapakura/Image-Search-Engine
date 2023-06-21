@@ -1,4 +1,6 @@
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useContext, useEffect, useRef, useState } from "react";
+import { FileContext } from "../pages/_app";
+import { fetchSimilarImages } from "../pages";
 
 type Props = {
     children?: ReactNode
@@ -7,6 +9,7 @@ type Props = {
 export default function DragAndDrop({children}: Props) {
     // drag state
     const [dragActive, setDragActive] = useState(false);
+    const { fileState, dispatch } = useContext(FileContext)
     
     // handle drag events
     const handleDrag = function(e) {
@@ -29,12 +32,21 @@ export default function DragAndDrop({children}: Props) {
       e.stopPropagation();
       setDragActive(false);
       if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        console.log(e.dataTransfer.files[0]);
-        if (!(e.dataTransfer.files[0] as File).type.startsWith("image")) {
-            alert("Invalid file type.")
-        }
+        dispatch({
+          type: "update file",
+          payload: e.dataTransfer.files[0]
+        })
+        dispatch({
+          type: "update fileURL",
+          payload: URL.createObjectURL(e.dataTransfer.files[0])
+        })
     }
-    };                                  
+    };
+    
+      // fetch similar images whenever fileURL changes
+    useEffect(() => {
+      fetchSimilarImages(fileState, dispatch);
+    }, [fileState.fileURL])
     
     return (
       <form 
