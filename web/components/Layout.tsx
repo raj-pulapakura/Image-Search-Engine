@@ -18,10 +18,10 @@ export default function Layout({ children, title = 'This is the default title' }
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="flex flex-col items-center">
-        <header className="mt-20 w-4/5">
+        <header className="mt-10 w-4/5">
           <h1 className={`text-5xl ${fontBlack.className} text-center`}>Image Search Engine</h1>
         </header>
-        <div className="w-full mt-20">
+        <div className="w-full mt-10">
           {children}
         </div>
       </div>

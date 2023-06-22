@@ -99,26 +99,24 @@ export default function IndexPage() {
   return (
     <Layout title="Home">
       <DragAndDrop>
-        <div className="flex flex-col items-center">
-          <button onClick={() => inputRef.current.click()} className={`bg-black hover:bg-white text-white hover:text-black border-white border-2 hover:border-black ${fontBold.className} px-14 py-2.5 rounded-md shadow hover:shadow-2xl`}>
-            UPLOAD
-          </button>
-          <input
-            ref={inputRef}
-            type="file"
-            id="file-upload"
-            onChange={handleFileInputChange}
-            hidden
-          />
-          <h3 className={`mt-6 ${fontBold.className} text-xl text-center`}>
-            or drag and drop a file into this box
-          </h3>
+        <div className={`flex flex-col ${fileState.fileURL && "md:flex-row"} items-center justify-center gap-10`}>
+          <div className="flex flex-col items-center">
+            <button onClick={() => inputRef.current.click()} className={`bg-black hover:bg-white text-white hover:text-black border-white border-2 hover:border-black ${fontBold.className} px-14 py-2.5 rounded-md shadow hover:shadow-2xl`}>
+              UPLOAD
+            </button>
+            <input
+              ref={inputRef}
+              type="file"
+              id="file-upload"
+              onChange={handleFileInputChange}
+              hidden
+            />
+            <h3 className={`mt-6 ${fontBold.className} text-xl text-center`}>
+              or drag and drop a file into this box
+            </h3>
+          </div>
           {fileState.fileURL && 
-            <>
-              <div>
-                <Image className="mt-6" src={fileState.fileURL} alt="Uploaded image" width={100} height={100} />
-              </div>
-            </>
+            <Image src={fileState.fileURL} alt="Uploaded image" width={200} height={100} />
           }
         </div>
       </DragAndDrop>
@@ -140,7 +138,7 @@ export default function IndexPage() {
       
       {
         fileState.status === "done" && !fileState.errorMsg && (
-          <div className="w-3/4 m-auto mt-20">
+          <div className="w-3/4 m-auto mt-10">
             <Gallery />
           </div>
         )
