@@ -1,11 +1,12 @@
 import Layout from '../components/Layout'
-import { FileAction, FileContext, FileState, fontBold } from './_app'
+import { FileContext, fontBold } from './_app'
 import { Dispatch, useContext, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import DragAndDrop from '../components/DragAndDrop';
 import { useRouter } from 'next/router';
 import Gallery from '../components/Gallery';
 import { ProgressBar } from 'react-loader-spinner'
+import { FileAction, FileState } from '../interfaces/fileState';
 
 export async function fetchSimilarImages(fileState: FileState, dispatch: Dispatch<FileAction>) {
   if (!fileState.file) return;
@@ -139,7 +140,7 @@ export default function IndexPage() {
       
       {
         fileState.status === "done" && !fileState.errorMsg && (
-          <div className="mt-20">
+          <div className="w-3/4 m-auto mt-20">
             <Gallery />
           </div>
         )
