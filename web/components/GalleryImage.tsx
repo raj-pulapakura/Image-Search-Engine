@@ -50,7 +50,7 @@ export default function GalleryImage({ src, key, alt, width, height }: Props) {
                 {/* image backdrop */}
                 <div onClick={handleClick} className="absolute w-full h-full bg-black/20"></div>
                 {/* download button */}
-                <button onClick={downloadImg} className="rounded-sm p-1.5 absolute bottom-3 right-3 bg-white hover:bg-slate-300 active:bg-slate-400"><Image src="../images/download.png" alt="download button" width={24} height={24} /></button>
+                <button onClick={downloadImg} className="rounded-sm p-2 absolute bottom-3 right-3 bg-white hover:bg-slate-300 active:bg-slate-400"><Image src="../images/download.png" alt="download button" width={24} height={24} /></button>
             </> }
             {/* image */}
             <Image
