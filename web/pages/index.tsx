@@ -103,7 +103,7 @@ export default function IndexPage() {
       <DragAndDrop>
         <div className={`flex flex-col ${fileState.fileURL && "md:flex-row"} items-center justify-center gap-10`}>
           <div className="flex flex-col items-center">
-            <button onClick={() => inputRef.current.click()} className={`bg-black hover:bg-white active:bg-gray-200 text-white hover:text-black border-white border-2 hover:border-black ${fontBold.className} px-14 py-2.5 rounded-md shadow hover:shadow-2xl`}>
+            <button onClick={() => inputRef.current.click()} className={`bg-black hover:bg-white active:bg-gray-200 text-white hover:text-black border-white border-2 hover:border-black ${fontBold.className} px-14 py-4 rounded-md shadow hover:shadow-2xl`}>
               UPLOAD
             </button>
             <input
