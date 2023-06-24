@@ -99,7 +99,7 @@ export default function IndexPage() {
   }, [fileState.fileURL])
 
   return (
-    <Layout title="Home">
+    <Layout title="Image Search Engine">
       <DragAndDrop>
         <div className={`flex flex-col ${fileState.fileURL && "md:flex-row"} items-center justify-center gap-10`}>
           <div className="flex flex-col items-center">

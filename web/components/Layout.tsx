@@ -18,6 +18,7 @@ export default function Layout({ children, title = 'This is the default title' }
         <title>{title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="shortcut icon" href="/static/search.png" />
       </Head>
       <div className="flex flex-col items-center">
         <header className="mt-10 w-4/5">
