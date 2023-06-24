@@ -5,7 +5,7 @@ import Image from 'next/image';
 import DragAndDrop from '../components/DragAndDrop';
 import { useRouter } from 'next/router';
 import Gallery from '../components/Gallery';
-import { ProgressBar } from 'react-loader-spinner'
+import { Oval } from 'react-loader-spinner'
 import { FileAction, FileState } from '../interfaces/fileState';
 
 export async function fetchSimilarImages(fileState: FileState, dispatch: Dispatch<FileAction>) {
@@ -81,14 +81,16 @@ export default function IndexPage() {
 
   // update file and fileURL whenever input changes
   const handleFileInputChange = (event) => {
-    dispatch({
-      type: "update file",
-      payload: event.target.files[0]
-    })
-    dispatch({
-      type: "update fileURL",
-      payload: URL.createObjectURL(event.target.files[0])
-    })
+    if (event.target.files && event.target.files[0]) {
+      dispatch({
+        type: "update file",
+        payload: event.target.files[0]
+      })
+      dispatch({
+        type: "update fileURL",
+        payload: URL.createObjectURL(event.target.files[0])
+      })
+    }
   };
 
   // fetch similar images whenever fileURL changes
@@ -101,7 +103,7 @@ export default function IndexPage() {
       <DragAndDrop>
         <div className={`flex flex-col ${fileState.fileURL && "md:flex-row"} items-center justify-center gap-10`}>
           <div className="flex flex-col items-center">
-            <button onClick={() => inputRef.current.click()} className={`bg-black hover:bg-white text-white hover:text-black border-white border-2 hover:border-black ${fontBold.className} px-14 py-2.5 rounded-md shadow hover:shadow-2xl`}>
+            <button onClick={() => inputRef.current.click()} className={`bg-black hover:bg-white active:bg-gray-200 text-white hover:text-black border-white border-2 hover:border-black ${fontBold.className} px-14 py-2.5 rounded-md shadow hover:shadow-2xl`}>
               UPLOAD
             </button>
             <input
@@ -114,6 +116,7 @@ export default function IndexPage() {
             <h3 className={`mt-6 ${fontBold.className} text-xl text-center`}>
               or drag and drop a file into this box
             </h3>
+            <p className="text-gray-500 mt-2">Only one image at a time</p>
           </div>
           {fileState.fileURL && 
             <Image src={fileState.fileURL} alt="Uploaded image" width={200} height={100} />
@@ -121,17 +124,17 @@ export default function IndexPage() {
         </div>
       </DragAndDrop>
 
-      <div className="w-3/4 m-auto flex justify-between mt-5 items-center">
-        <div>
-          <p>Status: {fileState.status}</p>
-          <p>{fileState.errorMsg && `An error occurred: ${fileState.errorMsg}`}</p>
-        </div>
+      <div className="w-3/4 m-auto flex items-center justify-center mt-5">
+        { fileState.errorMsg && 
+          <p className="text-red-500">{`An error occurred: ${fileState.errorMsg}. Please try again.`}</p>
+        }
         { fileState.status === "fetching similar images..." && 
-          <ProgressBar
-            width="50"
-            height="50"
-            borderColor='blue'
-            barColor="blue"
+          <Oval
+            width="30"
+            color="blue"
+            secondaryColor="light-blue"
+            strokeWidth={4}
+            wrapperClass='p-0 m-0'
           />
         }
       </div>

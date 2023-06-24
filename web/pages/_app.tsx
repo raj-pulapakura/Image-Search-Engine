@@ -1,12 +1,12 @@
 import React, {useReducer, createContext} from 'react'
 import { AppProps } from 'next/app'
-import { Poppins } from 'next/font/google'
+import { Noto_Sans } from 'next/font/google'
 import '../styles/index.css'
 import { FileAction, FileState } from '../interfaces/fileState'
 
-export const fontNormal = Poppins({weight: "400", subsets: ["latin"]})
-export const fontBold = Poppins({weight: "800", subsets: ["latin"]})
-export const fontBlack = Poppins({weight: "900", subsets: ["latin"]})
+export const fontNormal = Noto_Sans({weight: "400", subsets: ["latin"]})
+export const fontBold = Noto_Sans({weight: "800", subsets: ["latin"]})
+export const fontBlack = Noto_Sans({weight: "900", subsets: ["latin"]})
 
 const initialFileState: FileState = {
   file: null,

@@ -43,11 +43,6 @@ export default function DragAndDrop({children}: Props) {
     }
     };
     
-      // fetch similar images whenever fileURL changes
-    useEffect(() => {
-      fetchSimilarImages(fileState, dispatch);
-    }, [fileState.fileURL])
-    
     return (
       <form 
         className={`w-3/4 m-auto ${dragActive ? "bg-blue-100" : "bg-white"} border-black border-2 p-10 rounded-lg border-dashed`}
@@ -57,8 +52,6 @@ export default function DragAndDrop({children}: Props) {
         onDragLeave={handleDrag} 
         onDragOver={handleDrag}  
         onDrop={handleDrop}>
-        <label id="label-file-upload" htmlFor="input-file-upload">
-        </label>
         {children}
       </form>
     );
