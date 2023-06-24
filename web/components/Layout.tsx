@@ -30,10 +30,10 @@ export default function Layout({ children, title = 'This is the default title' }
       <footer className="bg-black px-3 py-3 mt-auto flex items-center justify-between">
         <h1 className="text-white">Made by Raj</h1>
           <div className="flex gap-3">
-            <Link href="https://github.com/raj-pulapakura/Image-Search-Engine">
+            <Link target='_blank' href="https://github.com/raj-pulapakura/Image-Search-Engine">
               <Image src="/images/github.png" alt="GitHub" width="35" height="35" />
             </Link>
-            <Link about="LinkedIn" href="https://www.linkedin.com/in/raj-pulapakura-9b2348234/">
+            <Link target='_blank' about="LinkedIn" href="https://www.linkedin.com/in/raj-pulapakura-9b2348234/">
               <Image src="/images/linkedin.png" alt="GitHub" width="35" height="35" />
             </Link>
           </div>
