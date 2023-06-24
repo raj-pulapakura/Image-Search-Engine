@@ -71,6 +71,6 @@ Tech used:
 
 ## 💡 What I learnt
 
-- 🏃‍♂️ **Model optimization**: In my quest to achieve lower inference times, I had to switch from Tensorflow to PyTorch and from ResNets to MobileNet. This process was painstaking, however it taught me the value of differnet model architectures and how some are better suited for application development.
+- 🏃‍♂️ **Model optimization**: In my quest to achieve lower inference times, I had to switch from Tensorflow to PyTorch and from ResNets to MobileNet. This process was painstaking, however it taught me the value of different model architectures and how some are better suited for application development.
 - 🌧️ **Deployment**: I was exposed to different technologies involved in the deployment process including Docker and AWS.
 - 🫡 **Never give up**: This may sound cliche, but it's a timeless mantra which applies no matter what field you are in. Many times throughout the project I was faced with a challenge or an error which made me want to give up. But through persistence and grit, I managed to overcome these challenges and eventually produce a functional ML application.
