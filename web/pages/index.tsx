@@ -90,6 +90,7 @@ export default function IndexPage() {
         type: "update fileURL",
         payload: URL.createObjectURL(event.target.files[0])
       })
+      fetchSimilarImages(fileState, dispatch);
     }
   };
 
