@@ -6,6 +6,22 @@
 - 💻 **Check it out**: https://image-search-pro.vercel.app/
 - 📷 **Video demonstration**: https://www.youtube.com/watch?v=loBZkPvn29c
 
+# 🤗 Website
+- 💪 **Frontend framework**: NextJS
+- 🌧️ **Deployment**: Vercel
+- 💻 **Check it out**: https://image-search-pro.vercel.app/
+- 📷 **Video demonstration**: https://www.youtube.com/watch?v=loBZkPvn29c
+
+## Usage
+
+1. Upload (or drag and drop) an image into the website
+
+![Screenshot 2023-06-24 192730](https://github.com/raj-pulapakura/Image-Search-Engine/assets/87762282/8b220bec-a8e8-4972-af6c-bee80211b73c)
+
+2. Find and download similar images
+
+![Screenshot 2023-06-24 193050](https://github.com/raj-pulapakura/Image-Search-Engine/assets/87762282/46ac6e74-4c80-4285-86fa-558bd4461124)
+
 # 🤖 Backend
 - 🎰 **ML Framework**: PyTorch
 - 🏈 **Backend Framework**: BentoML
@@ -43,18 +59,18 @@ After experimenting with different backend frameworks such as FastAPI and Flask,
 ## 🌧️ Backend: deployment
 BentoML offers a tool called [bentoctl](https://github.com/bentoml/bentoctl), which is used to deploy BentoML services to production ready API endpoints in the cloud. It does this using [AWS Lambda](https://aws.amazon.com/lambda/), [AWS API Gateway](https://aws.amazon.com/api-gateway/), and [AWS ECR](https://aws.amazon.com/ecr/), whilst using [Terraform](https://www.terraform.io/) to automate the creation of this infrastructure.
 
-# Website
-- 💪 **Frontend framework**: NextJS
-- 🌧️ **Deployment**: Vercel
-- 💻 **Check it out**: https://image-search-pro.vercel.app/
-- 📷 **Video demonstration**: https://www.youtube.com/watch?v=loBZkPvn29c
+# 📜 Summary
 
-## Usage
+## ⚙️ Technologies
 
-1. Upload (or drag and drop) an image into the website
+This project exposed me to many different technologies involved in ML application deployment, as well full stack development.
 
-![Screenshot 2023-06-24 192730](https://github.com/raj-pulapakura/Image-Search-Engine/assets/87762282/8b220bec-a8e8-4972-af6c-bee80211b73c)
+Tech used:
+- Frontend: NextJS, Vercel
+- Backend: PyTorch, BentoML, AWS, Terraform
 
-2. Find and download similar images
+## 💡 What I learnt
 
-![Screenshot 2023-06-24 193050](https://github.com/raj-pulapakura/Image-Search-Engine/assets/87762282/46ac6e74-4c80-4285-86fa-558bd4461124)
+- 🏃‍♂️ **Model optimization**: In my quest to achieve lower inference times, I had to switch from Tensorflow to PyTorch and from ResNets to MobileNet. This process was painstaking, however it taught me the value of differnet model architectures and how some are better suited for application development.
+- 🌧️ **Deployment**: I was exposed to different technologies involved in the deployment process including Docker and AWS.
+- 🫡 **Never give up**: This may sound cliche, but it's a timeless mantra which applies no matter what field you are in. Many times throughout the project I was faced with a challenge or an error which made me want to give up. But through persistence and grit, I managed to overcome these challenges and eventually produce a functional ML application.
