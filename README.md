@@ -30,10 +30,10 @@
 
 ![Model Overview](https://github.com/raj-pulapakura/Image-Search-Engine/assets/87762282/a9d04a84-95cd-4aec-9123-725eeb1b66ea)
 
-## Test the API with Postman
+## 🧪 Test the API with Postman
 
 1. Open up Postman and paste the aforementioned API Link
-2. Make sure it the request METHOD is set to "POST"
+2. Make sure the request METHOD is set to "POST"
 3. Go to "Body" and select "form-data"
 4. Add a new file key named "image" and upload a file from your PC
 5. Hit "Send"
